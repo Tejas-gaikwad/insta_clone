@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:instagram_clone_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
@@ -80,7 +81,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: navigationTapped,
         type: BottomNavigationBarType.fixed,
-        // backgroundColor: Colors.greenAccent,
+        backgroundColor: mobileBackgroundColor,
         // onTap: navigationTapped(_page),
         items: [
           BottomNavigationBarItem(

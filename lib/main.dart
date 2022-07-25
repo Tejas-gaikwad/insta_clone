@@ -10,6 +10,7 @@ import 'package:instagram_clone_app/screens/homescreen.dart';
 import 'package:instagram_clone_app/screens/login_screen_ui.dart';
 import 'package:instagram_clone_app/screens/returnscreen.dart';
 import 'package:instagram_clone_app/screens/sign_up.dart';
+import 'package:instagram_clone_app/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -44,7 +45,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Instagram Clone',
-        theme: ThemeData.dark(),
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: mobileBackgroundColor
+        ),
         // home: const ResponsiveLayout(
         //     mobileScreenLayout: MobileScreenLayout(),
         //     webScreenLayout: WebScreenLayout())

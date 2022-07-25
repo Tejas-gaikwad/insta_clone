@@ -24,6 +24,8 @@ class _Add_PostState extends State<Add_Post> {
 
    final TextEditingController _descriptionController = TextEditingController();
 
+   bool _isLoading = false ;
+
   Uint8List? _file;
 
   _selectImage(BuildContext context) async {
@@ -78,6 +80,9 @@ class _Add_PostState extends State<Add_Post> {
       String username,
       String profileImage,
       ) async {
+              setState((){
+                _isLoading = true;
+              });
             try {
               print("Started");
               String res = await FirestoreMethods().uploadPost(
@@ -90,8 +95,15 @@ class _Add_PostState extends State<Add_Post> {
               print("finish ");
 
               if(res == 'success') {
+                setState((){
+                  _isLoading = false;
+                });
                 showSnackBar("Posted!", context);
-              }else {
+                clearImage();
+              }else { 
+                setState((){
+                  _isLoading = false;
+                });
                 showSnackBar(res.toString(), context);
               }
             } catch(e) {
@@ -99,6 +111,11 @@ class _Add_PostState extends State<Add_Post> {
             }
         }
 
+  void clearImage() {
+    setState((){
+      _file = null;
+    });
+  }
   // _postImagToFirebase() async {
   //   print(" It is starting }{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{");
   //
@@ -132,7 +149,7 @@ class _Add_PostState extends State<Add_Post> {
      Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){},
+          onPressed: clearImage,
           icon: Icon(Icons.arrow_back),
         ),
         actions: [
@@ -152,6 +169,8 @@ class _Add_PostState extends State<Add_Post> {
       ),
       body: Column(
         children: [
+          _isLoading == true ? LinearProgressIndicator(
+          ): SizedBox(height: 0),
           SizedBox(height: 24,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
